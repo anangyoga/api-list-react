@@ -6,6 +6,7 @@ import api from "./config/api";
 
 const App = () => {
   const [entries, setEntries] = useState([]);
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     api.get("entries").then((response) => setEntries(response.data.entries.slice(0, 30)));
@@ -13,10 +14,10 @@ const App = () => {
 
   return (
     <div>
-      <Jumbotron />
+      <Jumbotron query={query} setQuery={setQuery} />
       <div className="container mx-auto max-w-4xl">
         <Tags />
-        <ListAPI entries={entries} />
+        <ListAPI entries={entries} query={query} />
       </div>
     </div>
   );
